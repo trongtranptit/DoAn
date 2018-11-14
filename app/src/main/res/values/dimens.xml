@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_start_navigate_menu_padding">@dimen/_3sdp</dimen>
+    <dimen name="screen_start_btn_create_import_wallet_margin"></dimen>
+    <dimen name="account_image_padding">@dimen/_5sdp</dimen>
+    <dimen name="small_text_size1">@dimen/_8sdp</dimen>
+    <dimen name="small_text_size2">@dimen/_10sdp</dimen>
+    <dimen name="small_text_size3">@dimen/_12sdp</dimen>
+    <dimen name="normal_text_size1">@dimen/_15sdp</dimen>
+    <dimen name="normal_text_size2">@dimen/_18sdp</dimen>
+    <dimen name="normal_text_size3">@dimen/_20sdp</dimen>
+    <dimen name="text_margin">@dimen/_3sdp</dimen>
+    <dimen name="navigation_drawer_width">@dimen/_200sdp</dimen>
+    <dimen name="delete_wallet_iv_size">@dimen/_25sdp</dimen>
+    <dimen name="ic_add_wallet_size">@dimen/_30sdp</dimen>
+    <dimen name="ic_next_size">@dimen/_30sdp</dimen>
+</resources>

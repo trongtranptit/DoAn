@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">DoAn-Web3j</string>
+    <string name="infura_ropsten_token">https://ropsten.infura.io/v3/09e4f4e2d6c647f7b4f3bdf0736c9640</string>
+    <string name="infura_rinkeby_token">https://rinkeby.infura.io/v3/09e4f4e2d6c647f7b4f3bdf0736c9640</string>
+    <string name="infura_kovan_token">https://kovan.infura.io/v3/09e4f4e2d6c647f7b4f3bdf0736c9640</string>
+    <string name="create_wallet">Create Wallet</string>
+    <string name="import_wallet">Import Wallet</string>
+    <string name="send">Send</string>
+    <string name="buy">Buy</string>
+    <string name="input_password">Input your password</string>
+    <string name="confirm">Confirm</string>
+    <string name="receive">Receive</string>
+    <string name="token">Token</string>
+    <string name="sent">Sent</string>
+    <string name="you_must_enter_password">You must enter password!</string>
+    <string name="you_must_enter_all_infor">You must enter all infor!</string>
+    <string name="confirm_password_does_not_match">Confirm password does not match!</string>
+    <string name="inputed_infor_is_incorrect">Inputed infor is incorrect!</string>
+    <string name="error_happened">Some errors happened!</string>
+    <string name="loading">Loading...</string>
+    <string name="key_store_star">Key store*</string>
+    <string name="key_store">Key store</string>
+    <string name="private_key">Private key</string>
+    <string name="import_text">Import</string>
+    <string name="field_require">*Field required</string>
+    <string name="password">Password</string>
+    <string name="private_key_star">Private key*</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="_1_ether">1000000000000000000</string>
+    <string name="recipient_address">Recipient Address</string>
+    <string name="amount_eth">Amount ETH</string>
+    <string name="gas_price">Gas Price</string>
+    <string name="gas_limit">Gas Limit</string>
+    <string name="send_eth">Send ETH</string>
+    <string name="network_fee">Network fee</string>
+    <string name="invalid_address">Invalid address</string>
+    <string-array name="test_net">
+        <item>Ropsten testnet</item>
+        <item>Kovan testnet</item>
+        <item>Rinkeby testnet</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

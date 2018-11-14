@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation ="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:gravity="center"
+        android:textColor="@color/blue_300"
+        android:textSize="@dimen/normal_text_size2"
+        android:text="test"
+        android:id="@+id/confirm_dialog_tv_detail_tx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+    <Button
+        android:id="@+id/confirm_dialog_btn_confirm"
+        android:textColor="@color/white"
+        android:background="@color/blue_300"
+        android:text="@string/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Button>
+</LinearLayout>

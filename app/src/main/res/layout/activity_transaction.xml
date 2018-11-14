@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.trong.clas.screen.sendtx.TransactionActivity">
+    <RelativeLayout
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/normal_text_size3"
+            android:text="Send ETH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <FrameLayout
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/send_tx_ic_next"
+                android:src="@drawable/ic_navigate_next_blue_300_36dp"
+                android:layout_width="@dimen/ic_next_size"
+                android:layout_height="@dimen/ic_next_size" />
+        </FrameLayout>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="@dimen/_5sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/small_text_size3"
+                    android:textColor="@color/black"
+                    android:text="@string/recipient_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/send_tx_edt_to_address"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normal_text_size2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/send_tx_tv_invalid_address"
+                    android:textColor="#f44"
+                    android:textSize="@dimen/small_text_size2"
+                    android:text="@string/invalid_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/small_text_size3"
+                        android:textColor="@color/black"
+                        android:text="@string/gas_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/small_text_size3"
+                        android:layout_alignParentRight="true"
+                        android:text="1 Gwei"
+                        android:id="@+id/send_tx_tv_gas_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <SeekBar
+                    android:max="100"
+                    android:min="1"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/send_tx_seekbar_gas_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/small_text_size3"
+                        android:textColor="@color/black"
+                        android:text="@string/gas_limit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/small_text_size3"
+                        android:layout_alignParentRight="true"
+                        android:text="21000"
+                        android:id="@+id/send_tx_tv_gas_limit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <SeekBar
+                    android:max="300"
+                    android:min="21"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/send_tx_seekbar_gas_limit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/small_text_size3"
+                    android:textColor="@color/black"
+                    android:text="@string/amount_eth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:id="@+id/send_tx_edt_amount_eth"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normal_text_size2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="@dimen/small_text_size3"
+                    android:textColor="@color/black"
+                    android:text="@string/network_fee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+                <TextView
+                    android:id="@+id/send_tx_tv_network_fee"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/small_text_size3"
+                    android:textColor="@color/black"
+                    android:text="2.1E-5 ETH"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
