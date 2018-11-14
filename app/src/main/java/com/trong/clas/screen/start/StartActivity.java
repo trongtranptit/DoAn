@@ -47,6 +47,7 @@ import org.web3j.crypto.Credentials;
 import org.web3j.crypto.ECKeyPair;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.utils.Convert;
+import org.web3j.utils.Numeric;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -267,12 +268,19 @@ public class StartActivity extends AppCompatActivity implements StartView{
             SavedInfor infor = new SavedInfor();
             infor.setAddress(credentials.getAddress());
             Log.d("private key",credentials.getEcKeyPair().getPrivateKey().toString());
-            infor.setPrivatekey(credentials.getEcKeyPair().getPrivateKey().toString());
-            infor.setPublickey(credentials.getEcKeyPair().getPublicKey().toString());
+
+            String privKey = Numeric.toHexStringNoPrefixZeroPadded(credentials.getEcKeyPair().getPrivateKey(),64);
+            String pubKey = Numeric.toHexStringNoPrefixZeroPadded(credentials.getEcKeyPair().getPublicKey(),128);
+
+            infor.setPrivatekey(privKey);
+            infor.setPublickey(pubKey);
             infor.setPassword(pw);
             infor.setmIsCurrentWallet(true);
             infor.setAccountName("Account "+(mAllInfors.size()+1));
             boolean b = UserUtil.newInstance().saveUserInfo(getApplicationContext(), infor);
+
+            Log.d(">>>", infor.toString());
+
             if (b) {
                 if (mCurrentInfor!= null ) {
                     SavedInfor si =  SavedInfor.getInstance(mCurrentInfor);

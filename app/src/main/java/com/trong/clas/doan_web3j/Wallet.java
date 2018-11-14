@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 
 import io.github.novacrypto.bip39.MnemonicGenerator;
+import io.github.novacrypto.bip39.Words;
 import io.github.novacrypto.bip39.wordlists.English;
 
 public class Wallet {
@@ -44,10 +45,9 @@ public class Wallet {
             file.createNewFile();
 
 
-
-
+            ECKeyPair ecKeyPair = createECKeyPair(createMnemonics());
             String fileName = WalletUtils.generateWalletFile(password,
-                    createECKeyPair(createMnemonics()),new File(path), false);
+                    ecKeyPair,new File(path), false);
             Credentials credentials = Wallet.loadCredentials(password, path + "/"+fileName);
             Log.d("credential", credentials.toString());
             File fileToDelete = new File(path + "/"+fileName);
@@ -61,6 +61,7 @@ public class Wallet {
 
     public static Credentials loadCredentials( String password, String path) {
         try{
+            Log.d("loadCredentials", password + " - " + path );
             Credentials credentials = WalletUtils.loadCredentials(password, new File(path));
             Log.d("credential: ","priv key: " + credentials.getEcKeyPair().getPrivateKey());
             Log.d("credential: ","address: " + credentials.getAddress());
@@ -125,7 +126,7 @@ public class Wallet {
 
     private static String createMnemonics(){
         final StringBuilder sb  = new StringBuilder();
-        byte[] entropy = new byte[128];
+        byte[] entropy = new byte[Words.TWELVE.byteLength()];
         SecureRandom secureRandom = new SecureRandom();
         secureRandom.nextBytes(entropy);
         new MnemonicGenerator(English.INSTANCE)
