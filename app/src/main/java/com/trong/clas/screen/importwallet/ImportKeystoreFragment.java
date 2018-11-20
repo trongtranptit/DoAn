@@ -15,6 +15,7 @@ import com.trong.clas.model.SavedInfor;
 import com.trong.clas.util.DialogFactory;
 
 import org.web3j.crypto.Credentials;
+import org.web3j.utils.Numeric;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,8 +60,8 @@ public class ImportKeystoreFragment extends Fragment {
                     }
                     else {
                         infor.setAddress(credentials.getAddress());
-                        infor.setPrivatekey(credentials.getEcKeyPair().getPrivateKey().toString());
-                        infor.setPublickey(credentials.getEcKeyPair().getPublicKey().toString());
+                        infor.setPrivatekey(Numeric.toHexStringNoPrefixZeroPadded(credentials.getEcKeyPair().getPrivateKey(),64));
+                        infor.setPublickey(Numeric.toHexStringNoPrefixZeroPadded(credentials.getEcKeyPair().getPublicKey(),128));
                         infor.setmIsCurrentWallet(true);
                         ((ImportWalletActivity) getActivity()).onImport(infor);
                     }

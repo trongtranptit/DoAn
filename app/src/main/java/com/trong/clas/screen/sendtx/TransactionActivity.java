@@ -51,6 +51,7 @@ public class TransactionActivity extends AppCompatActivity implements Transactio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
         mPresenter = new TransactionPresenter();
+        setResult(Constant.HAVENT_SENT);
         mPresenter.attachView(this);
         mDialog = new ProgressDialog(this);
         mBalance = (String) getIntent().getSerializableExtra(Constant.BALANCE);

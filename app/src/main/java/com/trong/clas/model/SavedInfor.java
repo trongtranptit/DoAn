@@ -100,6 +100,7 @@ public class SavedInfor extends RealmObject implements Serializable {
     public static boolean saveToRealm(SavedInfor walletInfor) {
         try{
             Realm realm = Realm.getDefaultInstance();
+
             SavedInfor infor = new SavedInfor();
             infor.setAddress(walletInfor.getAddress());
             infor.setPassword(walletInfor.getPassword());

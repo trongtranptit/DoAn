@@ -64,7 +64,7 @@ public class StartActivity extends AppCompatActivity implements StartView{
     private LinearLayout mLLCreateImport;
     private Toolbar mHomeToolbar;
     private LinearLayout mLLTabSent;
-    private LinearLayout mLLTabToken;
+    private LinearLayout mLLTabReceived;
     private TextView mTvBalance;
     private TextView mTvAccount;
     private TextView mTvAddress;
@@ -74,16 +74,21 @@ public class StartActivity extends AppCompatActivity implements StartView{
     private RecyclerView mRcvTx;
     private RecyclerView mRcvWallets;
     private DrawerListWalletRcvAdapter mListWalletAdapter;
-    private TransactionAdapter mListTxAdapter;
+    private TransactionAdapter mReceivedTxAdapter;
+    private TransactionAdapter mSentTxAdapter;
     private LinearLayoutManager mListWalletLayoutManager;
-    private LinearLayoutManager mListTxLayoutManager;
+    private LinearLayoutManager mReceivedTxLayoutManager;
+    private LinearLayoutManager mSentTxLayoutManager;
     private DrawerLayout mDrawerLayout;
     private ImageView mIvNavigateMenu;
     private StartPresenter mPresenter;
     private SavedInfor mCurrentInfor;
     private ArrayList<SavedInfor> mAllInfors;
     private ArrayList<Transaction> mTxList;
+    private ArrayList<Transaction> mReceivedTxs;
+    private ArrayList<Transaction> mSentTxs;
     private ImageView mIvAddWallet;
+    private TextView mTvNoTxFound;
     private String mBalance;
     private String permissions[] = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -119,15 +124,37 @@ public class StartActivity extends AppCompatActivity implements StartView{
     }
 
     private void tabSentClicked() {
-        mRcvTx.setVisibility(View.VISIBLE);
-        mLLTabToken.setBackgroundResource(R.color.white);
+        mLLTabReceived.setBackgroundResource(R.color.white);
         mLLTabSent.setBackgroundResource(R.color.bg_gray);
+        if (mSentTxs == null || mSentTxs.size() == 0) {
+            mRcvTx.setVisibility(View.GONE);
+            mTvNoTxFound.setVisibility(View.VISIBLE);
+        }
+        else{
+            mSentTxLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+            mSentTxAdapter = new TransactionAdapter(this, mSentTxs, this);
+            mRcvTx.setAdapter(mSentTxAdapter);
+            mRcvTx.setLayoutManager(mSentTxLayoutManager);
+            mRcvTx.setVisibility(View.VISIBLE);
+            mTvNoTxFound.setVisibility(View.GONE);
+        }
     }
 
-    private void tabTokenClicked(){
-        mRcvTx.setVisibility(View.GONE);
-        mLLTabToken.setBackgroundResource(R.color.bg_gray);
+    private void tabReceivedClicked(){
+        mLLTabReceived.setBackgroundResource(R.color.bg_gray);
         mLLTabSent.setBackgroundResource(R.color.white);
+        if (mReceivedTxs == null || mReceivedTxs.size() == 0) {
+            mRcvTx.setVisibility(View.GONE);
+            mTvNoTxFound.setVisibility(View.VISIBLE);
+        }
+        else{
+            mReceivedTxLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+            mReceivedTxAdapter = new TransactionAdapter(this, mReceivedTxs, this);
+            mRcvTx.setAdapter(mReceivedTxAdapter);
+            mRcvTx.setLayoutManager(mReceivedTxLayoutManager);
+            mRcvTx.setVisibility(View.VISIBLE);
+            mTvNoTxFound.setVisibility(View.GONE);
+        }
     }
 
     private boolean isAlreadySignedIn() {
@@ -161,7 +188,7 @@ public class StartActivity extends AppCompatActivity implements StartView{
 //        mScrollView = findViewById(R.id.scroll_main_content);
         mLLCreateImport = findViewById(R.id.ll_create_import);
         mLLTabSent = findViewById(R.id.ll_tab_sent);
-        mLLTabToken = findViewById(R.id.ll_tab_token);
+        mLLTabReceived = findViewById(R.id.ll_tab_receive);
         mRcvTx = findViewById(R.id.rcv_tx);
         mTvAccount = findViewById(R.id.tv_account);
         mTvBalance = findViewById(R.id.tv_balance);
@@ -169,6 +196,7 @@ public class StartActivity extends AppCompatActivity implements StartView{
         mBtnBuy = findViewById(R.id.btn_buy);
         mBtnSend = findViewById(R.id.btn_send_tx);
         mDrawerLayout = findViewById(R.id.drawer_main_content);
+        mTvNoTxFound = findViewById(R.id.start_screen_tv_no_tx_found);
         mRcvWallets = findViewById(R.id.rcv_list_wallet);
 //        mIvNavigateMenu = findViewById(R.id.navigate_menu);
 
@@ -198,10 +226,10 @@ public class StartActivity extends AppCompatActivity implements StartView{
             }
         });
 
-        mLLTabToken.setOnClickListener(new View.OnClickListener() {
+        mLLTabReceived.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tabTokenClicked();
+                tabReceivedClicked();
             }
         });
         if (isAlreadySignedIn()) {
@@ -314,6 +342,10 @@ public class StartActivity extends AppCompatActivity implements StartView{
                 //show dialog success
                 DialogFactory.simpleMessWithBtnOk(StartActivity.this, "","Send success !").show();
             }
+            else if (resultCode == Constant.HAVENT_SENT) {
+
+            }
+
             else {
                 //show dialog failed
                 DialogFactory.simpleMessWithBtnOk(StartActivity.this, "", "Send failed !").show();
@@ -423,16 +455,26 @@ public class StartActivity extends AppCompatActivity implements StartView{
     @Override
     public void onItemListTxClick(View view, int pos) {
         // show Detail Tx
+        Transaction tx = (Transaction) view.getTag();
+        Intent t = new Intent(StartActivity.this, DetailTxActivity.class);
+        t.putExtra(Constant.TX, tx);
+        startActivity(t);
     }
 
     @Override
     public void onGetListTx(ArrayList<Transaction> transactions) {
         if (transactions != null) {
-            mTxList = transactions;
-            mListTxLayoutManager = new LinearLayoutManager(StartActivity.this, LinearLayoutManager.VERTICAL,false);
-            mListTxAdapter = new TransactionAdapter(StartActivity.this, mTxList, this);
-            mRcvTx.setLayoutManager(mListTxLayoutManager);
-            mRcvTx.setAdapter(mListTxAdapter);
+            mReceivedTxs = new ArrayList<>();
+            mSentTxs = new ArrayList<>();
+            for (Transaction tx: transactions) {
+                if (tx.getFrom().equals(mCurrentInfor.getAddress())) {
+                    mSentTxs.add(tx);
+                }
+                else if (tx.getTo().equals(mCurrentInfor.getAddress())) {
+                    mReceivedTxs.add(tx);
+                }
+            }
+
         }
     }
 }

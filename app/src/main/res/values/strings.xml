@@ -10,7 +10,17 @@
     <string name="input_password">Input your password</string>
     <string name="confirm">Confirm</string>
     <string name="receive">Receive</string>
+    <string name="received">Received</string>
+    <string name="no_tx_found">No transaction founded!</string>
     <string name="token">Token</string>
+    <string name="detail_tx">Detail Transaction</string>
+    <string name="tx_hash">TxHash:</string>
+    <string name="tx_receipt_status">TxReceiptStatus:</string>
+    <string name="time_stamp">TimeStamp:</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="nonce">Nonce:</string>
+    <string name="input_data">InputData:</string>
     <string name="sent">Sent</string>
     <string name="you_must_enter_password">You must enter password!</string>
     <string name="you_must_enter_all_infor">You must enter all infor!</string>

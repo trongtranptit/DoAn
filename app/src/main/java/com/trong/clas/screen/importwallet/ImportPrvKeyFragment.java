@@ -15,6 +15,7 @@ import com.trong.clas.util.DialogFactory;
 
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.ECKeyPair;
+import org.web3j.utils.Numeric;
 
 import java.math.BigInteger;
 
@@ -51,13 +52,16 @@ public class ImportPrvKeyFragment extends Fragment {
                 }
                 else {
                     try{
+                        if (prvKey.length() == 64) { // 64bit key => convert to BigInteger key
+                            prvKey = Numeric.toBigInt(prvKey).toString();
+                        }
                         ECKeyPair keyPair = ECKeyPair.create(new BigInteger(prvKey));
                         Credentials credentials = Credentials.create(keyPair);
                         SavedInfor infor = new SavedInfor();
                         infor.setAddress(credentials.getAddress());
                         infor.setmIsCurrentWallet(true);
-                        infor.setPrivatekey(credentials.getEcKeyPair().getPrivateKey().toString());
-                        infor.setPublickey(credentials.getEcKeyPair().getPublicKey().toString());
+                        infor.setPrivatekey(Numeric.toHexStringNoPrefixZeroPadded(credentials.getEcKeyPair().getPrivateKey(),64));
+                        infor.setPublickey(Numeric.toHexStringNoPrefixZeroPadded(credentials.getEcKeyPair().getPublicKey(),128));
                         ((ImportWalletActivity) getActivity()).onImport(infor);
                     }
                     catch(Exception e) {
