@@ -12,4 +12,6 @@ public class Constant {
     public static final String IMPORTED_WALLET_INFO = "imported_wallet_info";
     public static final String STATUS_OK ="200";
     public static final String MESSAGE_OK = "OK";
+    public static final String TX = "tx";
+    public static final int HAVENT_SENT = 2311;
 }

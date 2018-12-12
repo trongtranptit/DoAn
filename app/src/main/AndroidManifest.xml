@@ -26,6 +26,7 @@
             android:name="com.trong.clas.screen.importwallet.ImportWalletActivity"
             android:theme="@style/ActionBarTheme" />
         <activity android:name="com.trong.clas.screen.sendtx.TransactionActivity" />
+        <activity android:name="com.trong.clas.screen.start.DetailTxActivity"></activity>
     </application>
 
 </manifest>

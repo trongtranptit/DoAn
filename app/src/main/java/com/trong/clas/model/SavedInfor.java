@@ -24,6 +24,19 @@ public class SavedInfor extends RealmObject implements Serializable {
     private String mPassword;
     private String mAccountName;
     private boolean mIsCurrentWallet;
+
+    @Override
+    public String toString() {
+        return "SavedInfor{" +
+                "mAddress='" + mAddress + '\'' +
+                ", mPublickey='" + mPublickey + '\'' +
+                ", mPrivatekey='" + mPrivatekey + '\'' +
+                ", mPassword='" + mPassword + '\'' +
+                ", mAccountName='" + mAccountName + '\'' +
+                ", mIsCurrentWallet=" + mIsCurrentWallet +
+                '}';
+    }
+
     public SavedInfor() {
     }
     public static SavedInfor getInstance(SavedInfor infor) {
@@ -87,6 +100,7 @@ public class SavedInfor extends RealmObject implements Serializable {
     public static boolean saveToRealm(SavedInfor walletInfor) {
         try{
             Realm realm = Realm.getDefaultInstance();
+
             SavedInfor infor = new SavedInfor();
             infor.setAddress(walletInfor.getAddress());
             infor.setPassword(walletInfor.getPassword());
